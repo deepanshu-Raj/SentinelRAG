@@ -1,2 +1,2 @@
-# FusionRAG
+# SentinelRAG
 N/A
