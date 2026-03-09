@@ -5,8 +5,8 @@
 __pycache__/
 
 # DataStore files should be created upon clone
-chunks.json
-*.index
+# chunks.json
+# *.index
 
 # Temp DS_Store files
 .DS_Store
