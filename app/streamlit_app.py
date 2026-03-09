@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import pandas as pd
@@ -208,10 +209,47 @@ def run_sentinelrag(query: str, model_name: str) -> dict:
 
 
 st.sidebar.header("Configuration")
+
+api_key = st.sidebar.text_input(
+    "OpenAI API Key",
+    type="password",
+    placeholder="sk-...",
+    help="Your key is not stored. It is only used for the duration of this session.",
+)
+
+key_confirmed = st.session_state.get("api_key_set", False)
+
+if key_confirmed and api_key:
+    btn_label = "✓ API Key Set"
+    btn_type = "secondary"
+    os.environ["OPENAI_API_KEY"] = api_key
+else:
+    btn_label = "Set API Key"
+    btn_type = "primary"
+
+st.sidebar.markdown(
+    '<div style="margin-top: -0.6rem; margin-bottom: -0.4rem;">',
+    unsafe_allow_html=True,
+)
+if st.sidebar.button(btn_label, type=btn_type, use_container_width=True):
+    if api_key:
+        st.session_state["api_key_set"] = True
+        os.environ["OPENAI_API_KEY"] = api_key
+        st.rerun()
+    else:
+        st.session_state["api_key_set"] = False
+st.sidebar.markdown("</div>", unsafe_allow_html=True)
+
+if not key_confirmed:
+    st.sidebar.markdown(
+        '<p style="font-size: 0.82rem; color: #b8860b; margin-top: -0.2rem;">Enter your OpenAI API key to run queries.</p>',
+        unsafe_allow_html=True,
+    )
+
 selected_model = st.sidebar.selectbox("Select model", MODELS, index=0)
 selected_mode = st.sidebar.selectbox("Select system mode", MODES, index=2)
 st.sidebar.markdown("---")
-show_plots = st.sidebar.checkbox("Show benchmark plots", value=False)
+show_plots = st.sidebar.checkbox("Show benchmark plots", value=True)
 
 if "query_text" not in st.session_state:
     st.session_state["query_text"] = "How does FastAPI dependency injection work?"
@@ -264,7 +302,9 @@ with top_right:
 if run_button:
     query = st.session_state["query_text"].strip()
 
-    if not query:
+    if not st.session_state.get("api_key_set") or not api_key:
+        st.error("Please enter and confirm your OpenAI API key in the sidebar.")
+    elif not query:
         st.warning("Please enter a query.")
     else:
         with st.spinner("Running..."):
