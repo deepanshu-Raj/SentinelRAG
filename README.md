@@ -1,6 +1,8 @@
 # SentinelRAG
 
-**Policy-Aware Hybrid Retrieval Agent with MCP-Style Tool Routing and Multi-Model Evaluation**
+**Policy-Aware Hybrid Retrieval Agent with MCP-Style Tool Routing and Multi-Model Evaluation** 
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sentinelrag-agent.streamlit.app/)
 
 SentinelRAG is a retrieval-augmented generation (RAG) system that prevents sensitive information leakage by combining hybrid retrieval (BM25 + FAISS), a two-stage policy engine, confidence-aware answer routing, and MCP-style tool abstraction. It benchmarks against naive LLM and standard RAG baselines across multiple OpenAI models.
 
