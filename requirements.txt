@@ -1,0 +1,10 @@
+faiss-cpu
+rank-bm25
+sentence-transformers
+numpy
+pandas
+tqdm
+python-dotenv
+openai
+streamlit
+matplotlib

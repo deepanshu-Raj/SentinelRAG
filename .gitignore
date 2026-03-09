@@ -1,0 +1,12 @@
+# Stores OPENAI_API_KEY - to be created by end-user
+*.env
+
+# Local run pycache to be ignored
+__pycache__/
+
+# DataStore files should be created upon clone
+chunks.json
+*.index
+
+# Temp DS_Store files
+.DS_Store
