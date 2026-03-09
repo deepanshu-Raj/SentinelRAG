@@ -182,13 +182,19 @@ python -m evaluation.plot_results
 
 ## Web Interface
 
-SentinelRAG ships with a Streamlit-based interactive demo (`app/streamlit_app.py`) that exposes the full system through a browser UI.
+SentinelRAG ships with a Streamlit-based interactive demo that exposes the full system through a browser UI.
 
-### Work in Progress
+> **Live Demo:** [sentinelrag-agent.streamlit.app](https://sentinelrag-agent.streamlit.app/)
+
+### API Key
+
+The hosted app does not bundle an API key. Users are prompted to enter their own OpenAI API key in the sidebar before running queries. The key is only held in memory for the duration of the session — it is never stored, logged, or transmitted anywhere other than the OpenAI API.
+
+The sidebar provides a password-masked input field and a **Set API Key** button. The button turns from red to green once the key is confirmed, giving clear visual feedback before any queries are executed.
 
 ### Sidebar Configuration
 
-The left sidebar provides two dropdowns for controlling the system:
+Below the API key input, the left sidebar provides:
 
 - **Select model** — choose between `gpt-5.4-2026-03-05`, `gpt-5.1-2025-11-13`, and `gpt-4o-2024-11-20`
 - **Select system mode** — switch between `naive_llm`, `plain_rag`, and `sentinelrag` to compare behavior in real time
@@ -196,7 +202,7 @@ The left sidebar provides two dropdowns for controlling the system:
 
 ### Query Interface
 
-The main panel contains a text area pre-filled with a sample query (`"How does FastAPI dependency injection work?"`). Clicking **Run Query** executes the selected mode and model combination and displays:
+The main panel contains a text area pre-filled with a sample query (`"How does FastAPI dependency injection work?"`), alongside quick-select buttons for both benign and adversarial example prompts. Clicking **Run Query** executes the selected mode and model combination and displays:
 
 - **Answer** — the generated response (or a block/abstain notice if policy intervened)
 - **Sources** — list of retrieved source files with relevance
@@ -212,13 +218,13 @@ When "Show benchmark plots" is enabled, the interface renders two side-by-side p
 
 A summary metrics table (loaded from `artifacts/summary_metrics.csv`) is displayed underneath the plots for precise numeric comparison.
 
-### Running the Interface
+### Running Locally
 
 ```bash
 streamlit run app/streamlit_app.py
 ```
 
-The app caches the hybrid retriever on first load (`@st.cache_resource`), so subsequent queries within the same session execute without re-indexing.
+The app caches the hybrid retriever on first load (`@st.cache_resource`), so subsequent queries within the same session execute without re-indexing. When running locally, you can either enter the key in the sidebar or set `OPENAI_API_KEY` in a `.env` file — the app checks both.
 
 ## Benchmark Results
 
