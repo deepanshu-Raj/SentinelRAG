@@ -312,7 +312,7 @@ SentinelRAG maintains identical retrieval quality to plain RAG — the policy la
 
 ### Safety and Latency
 
-SentinelRAG reduces leakage rate by **87–90%** compared to plain RAG while successfully blocking or flagging **45%** of adversarial queries. Latency is comparable to or lower than plain RAG due to early termination on blocked queries.
+SentinelRAG reduces leakage rate by **87–90%** compared to plain RAG while successfully blocking **9 out of 10 (90%)** adversarial queries. Latency is comparable to or lower than plain RAG due to early termination on blocked queries.
 
 <p align="center">
 <img alt="Safety and Latency" src="artifacts/safety_latency_comparison.png" width="100%"/>
@@ -332,7 +332,3 @@ SentinelRAG reduces leakage rate by **87–90%** compared to plain RAG while suc
 | **Latency** | End-to-end wall-clock time per query |
 
 </div>
-
-## License
-
-This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
