@@ -332,3 +332,7 @@ SentinelRAG reduces leakage rate by **87–90%** compared to plain RAG while suc
 | **Latency** | End-to-end wall-clock time per query |
 
 </div>
+
+## License
+
+This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
